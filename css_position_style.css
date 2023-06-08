@@ -1,0 +1,42 @@
+.container{
+    width: 500px;
+    height: 500px;
+    background-color: royalblue;
+}
+
+.wrap{
+    width: 700px;
+    height: 5700px;
+    background-color: blueviolet;
+    position: relative;
+}
+
+.container .item{
+    border: 3px dashed red;
+}
+
+.container .item:nth-child(1){
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+
+.container .item:nth-child(2){
+    width: 120px;
+    height: 150px;
+    background-color: orange;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+}
+
+
+.container .item:nth-child(3){
+    width: 70px;
+    height: 120px;
+    background-color: darkorange;
+}
