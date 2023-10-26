@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+</script>
+<body>
+    
+</body>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>테이블에 행과 셀 추가하기</title>
+</head>
+<body>
+    <table id="myTable" border="1">
+        <tr>
+            <th>(1, 1) 셀</th>
+            <th>(1, 2) 셀</th>
+        </tr>
+        <tr>
+            <th>(2, 1) 셀</th>
+            <th>(2, 2) 셀</th>
+        </tr>
+    </table>
+
+    <button onclick="addRow()">새로운 행 추가</button>
+    <button onclick="addCell()">셀 추가</button>
+
+    <script>
+        function addRow() {
+            var table = document.getElementById("myTable");
+            var newRow = table.insertRow(table.rows.length);
+
+            for (var i = 0; i < 2; i++) {
+                var cell = newRow.insertCell(i);
+                cell.innerHTML = "새로운 행, 셀 " + (i + 1);
+            }
+        }
+
+        function addCell() {
+            var table = document.getElementById("myTable");
+            var rows = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var newRow = rows[i];
+                var cell = newRow.insertCell(newRow.cells.length);
+                cell.innerHTML = "새로운 셀";
+            }
+        }
+    </script>
+</body>
+</html>
