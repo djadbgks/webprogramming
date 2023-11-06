@@ -1,57 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<script>
-
-</script>
-<body>
-    
-</body>
-<!DOCTYPE html>
 <html>
-<head>
-    <title>테이블에 행과 셀 추가하기</title>
-</head>
 <body>
-    <table id="myTable" border="1">
-        <tr>
-            <th>(1, 1) 셀</th>
-            <th>(1, 2) 셀</th>
-        </tr>
-        <tr>
-            <th>(2, 1) 셀</th>
-            <th>(2, 2) 셀</th>
-        </tr>
-    </table>
-
-    <button onclick="addRow()">새로운 행 추가</button>
-    <button onclick="addCell()">셀 추가</button>
-
+    <p>1부터 100 사이의 정수를 입력하시오.</p>
+    <input id="test">
+    <button type="button" onclick="sub()">제출</button>
+    <p id="result"></p>
     <script>
-        function addRow() {
-            var table = document.getElementById("myTable");
-            var newRow = table.insertRow(table.rows.length);
-
-            for (var i = 0; i < 2; i++) {
-                var cell = newRow.insertCell(i);
-                cell.innerHTML = "새로운 행, 셀 " + (i + 1);
+        function sub() {
+            let value = document.getElementById("test").value;
+            let s;
+            if (isIntegerInRange(value, 1, 100)) {
+                s = "올바른 입력값입니다.";
+            } else {
+                s = "입력값이 올바르지 않습니다.";
             }
+            document.getElementById("result").innerHTML = s;
         }
 
-        function addCell() {
-            var table = document.getElementById("myTable");
-            var rows = table.getElementsByTagName("tr");
-
-            for (var i = 0; i < rows.length; i++) {
-                var newRow = rows[i];
-                var cell = newRow.insertCell(newRow.cells.length);
-                cell.innerHTML = "새로운 셀";
-            }
+        function isIntegerInRange(value, min, max) {
+            const num = parseInt(value);
+            return !isNaN(num) && num >= min && num <= max;
         }
     </script>
 </body>
