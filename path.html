@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="myCanvas" width="300" height="200"
+style="border: 1px dotted red"></canvas>
+<script>
+let canvas = document.getElementById("myCanvas");
+let context = canvas.getContext("2d");
+context.beginPath();
+context.moveTo(80, 80);
+context.lineTo(25, 60);
+context.lineTo(150, 120);
+context.fill();
+context.fillRect(50, 50, 100, 50);
+</script>
+</body>
+</html>
