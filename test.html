@@ -1,18 +1,99 @@
-<script>
-    function checkLength(elem, min, max) {
-        let s = elem.value;
-        if (s.length >= min && s.length <= max) {
-            return true;
-        } else {
-            alert(min + " 문자와 " + max + " 문자 사이로 입력해주세요!");
-            return false;
-        }
-    }
-</script>
+<!DOCTYPE html>
+<html lang="en">
 
-<form>
-    이름(6-8 문자): <input type='text' id='name' />
-    <input type='button'
-        onclick="checkLength(document.getElementById('name'), 6, 8)"
-        value='확인' />
-</form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Canvas Drawing</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #myCanvas {
+            background-color: rgb(241, 239, 209);
+            border: 1px dotted blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center">
+        <label for="colorPicker">선 색상 선택: </label>
+        <input type="color" id="colorPicker" value="#000000">
+        <label for="lineWidth">선 굵기 선택: </label>
+        <input type="range" id="lineWidth" min="1" max="10" value="2">
+        <button type="button" class="btn btn-primary" onclick="clearCanvas()">화면 지우기</button><br>
+        <canvas id="myCanvas" width="600" height="400"></canvas>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let context = canvas.getContext("2d");
+        let last_x = 0, last_y = 0;
+        let draw_mode = false;
+
+        // Set initial color and line width
+        let colorPicker = document.getElementById("colorPicker");
+        let lineWidthInput = document.getElementById("lineWidth");
+
+        context.strokeStyle = colorPicker.value;
+        context.lineWidth = lineWidthInput.value;
+
+        colorPicker.addEventListener("input", function () {
+            context.strokeStyle = colorPicker.value;
+        });
+
+        lineWidthInput.addEventListener("input", function () {
+            context.lineWidth = lineWidthInput.value;
+        });
+
+        canvas.addEventListener("mousemove", function (event) {
+            if (!draw_mode) return;
+            let x = event.offsetX;
+            let y = event.offsetY;
+            context.lineTo(x, y);
+            context.stroke();
+            last_x = x;
+            last_y = y;
+        });
+
+        canvas.addEventListener("mousedown", function (event) {
+            last_x = event.offsetX;
+            last_y = event.offsetY;
+            context.beginPath();
+            context.moveTo(last_x, last_y);
+            draw_mode = true;
+        });
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        canvas.addEventListener("mouseup", function (event) {
+            draw_mode = false;
+        });
+
+        canvas.addEventListener("mouseout", function (event) {
+            draw_mode = false;
+        });
+    </script>
+</body>
+
+</html>
